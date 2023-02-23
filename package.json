@@ -1,16 +1,18 @@
 {
   "name": "with-chakra-ui",
+  "homepage": "http://otherland.github.io/lyricsapp",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "predeploy": "npm run build",
+    "prod": "next export",
+    "predeploy": "yarn run build",
     "deploy": "gh-pages -d build"
   },
   "repository": {
-    "url": "git+https://github.com/{USERNAME}/{REPONAME}.git"
+    "url": "git@github.com:otherland/lyricsapp.git"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.1.1",
