@@ -8,12 +8,12 @@
     "npm": "9.5.1"
   },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "prod": "next export",
-    "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build"
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider next dev",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider next build",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider next start",
+    "prod": "NODE_OPTIONS=--openssl-legacy-provider next export",
+    "predeploy": "NODE_OPTIONS=--openssl-legacy-provider yarn run build",
+    "deploy": "NODE_OPTIONS=--openssl-legacy-provider gh-pages -d build"
   },
   "repository": {
     "url": "git@github.com:otherland/lyricsapp.git"
@@ -24,7 +24,6 @@
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.0.0",
     "axios": "^0.24.0",
-    "caniuse-lite": "^1.0.30001458",
     "dependencies": "^0.0.1",
     "firebase": "^7.17.1",
     "firebase-admin": "^10.0.0",
