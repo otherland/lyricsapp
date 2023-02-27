@@ -4,7 +4,7 @@ module.exports = (phase, { defaultConfig }) => {
   return {
     ...defaultConfig,
 
-	assetPrefix: isProd ? '/lyricsapp/' : '',
+	// assetPrefix: isProd ? '/lyricsapp/' : '',
 	images: {
 	unoptimized: true,
 	},

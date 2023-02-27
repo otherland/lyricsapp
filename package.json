@@ -1,6 +1,5 @@
 {
   "name": "with-chakra-ui",
-  "homepage": "http://otherland.github.io/lyricsapp",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -12,9 +11,6 @@
     "build": "NODE_OPTIONS=--openssl-legacy-provider && next build",
     "start": "NODE_OPTIONS=--openssl-legacy-provider && next start -p $PORT",
     "prod": "NODE_OPTIONS=--openssl-legacy-provider && next export"
-  },
-  "repository": {
-    "url": "git@github.com:otherland/lyricsapp.git"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.1.1",
