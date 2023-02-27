@@ -12,7 +12,9 @@ import {
   FormHelperText,
   Input,
   IconButton,
+  Select
 } from "@chakra-ui/react";
+
 import { 
   ArrowLeftIcon,
   ArrowRightIcon
@@ -32,6 +34,17 @@ const db = fireStore;
 const PoemsList = () => {
   const [poems, setPoems] = useState([]);
   const [currentPoemIndex, setCurrentPoemIndex] = useState(0);
+  const [selectedEmotion, setSelectedEmotion] = useState("All");
+  
+  const emotionOptions = [
+    "All",
+    ...new Set(poems.map((poem) => poem.emotion)),
+  ];
+
+  const filteredPoems =
+    selectedEmotion === "All"
+      ? poems
+      : poems.filter((poem) => poem.emotion === selectedEmotion);
 
   useEffect(() => {
     const unsubscribe = db.collection('poems').orderBy('timestamp', 'desc')
@@ -50,11 +63,16 @@ const PoemsList = () => {
   }, []);
 
   const handleNext = () => {
-    setCurrentPoemIndex((index) => (index + 1) % poems.length);
+    setCurrentPoemIndex((index) => (index + 1) % filteredPoems.length);
   };
 
   const handlePrevious = () => {
-    setCurrentPoemIndex((index) => (index - 1 + poems.length) % poems.length);
+    setCurrentPoemIndex((index) => (index - 1 + filteredPoems.length) % filteredPoems.length);
+  };
+
+  const handleSelectChange = (event) => {
+    setSelectedEmotion(event.target.value);
+    setCurrentPoemIndex(0);
   };
 
   const formatPoem = (content) => {
@@ -77,10 +95,22 @@ const PoemsList = () => {
       />
     );
   }
-  const currentPoem = poems[currentPoemIndex];
-  if (currentPoem == undefined) return <div></div>;
+  
+  const currentPoem = filteredPoems[currentPoemIndex];
+
+  if (currentPoem == undefined) return <div>No poems.</div>;
+
   return (
     <div>
+        <Select value={selectedEmotion} onChange={handleSelectChange}
+          mb={4}
+        >
+          {emotionOptions.map((option) => (
+            <option key={option} value={option}>
+              {option.charAt(0).toUpperCase() + option.slice(1)}
+            </option>
+          ))}
+        </Select>
         <div style={{textAlign: 'center'}}>
           <Box mx="auto"
             bg="gray.800"
@@ -113,7 +143,7 @@ const PoemsList = () => {
             aria-label="Next poem"
             icon={<ArrowRightIcon />}
             onClick={handleNext}
-            disabled={currentPoemIndex === poems.length - 1}
+            disabled={currentPoemIndex === filteredPoems.length - 1}
           />
         </Box>
     </div>

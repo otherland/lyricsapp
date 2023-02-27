@@ -20,6 +20,7 @@
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.0.0",
     "axios": "^0.24.0",
+    "caniuse-lite": "^1.0.30001458",
     "dependencies": "^0.0.1",
     "firebase": "^7.17.1",
     "firebase-admin": "^10.0.0",
