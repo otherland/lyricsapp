@@ -43,6 +43,10 @@ const theme = extendTheme({
       body: {
         bg: "gray.600",
         color: "white",
+
+      },
+      ".chakra-ui-light": {
+          "display": "flex",
       },
     },
   },

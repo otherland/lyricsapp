@@ -115,7 +115,7 @@ const PoemsList = () => {
         <Center minHeight="100vh"
         flexDirection="column"
         color="white">
-          <Box width={{ base: "80%", md: "60%" }}>
+          <Box>
             <VStack spacing={6} align="stretch">
               <Box>
                 <HStack spacing={2}>
