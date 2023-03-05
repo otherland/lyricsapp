@@ -1,5 +1,6 @@
 import { FiShuffle } from "react-icons/fi";
 import React, { Component, useState, useEffect } from 'react';
+
 import {
   Box,
   Button,
@@ -14,10 +15,11 @@ import {
   Input,
   IconButton,
   Center,
+  Checkbox,
   VStack,
   HStack,
   useMediaQuery,
-  Select
+  Select,
 } from "@chakra-ui/react";
 
 import { 
@@ -41,6 +43,7 @@ const PoemsList = () => {
   const [currentPoemIndex, setCurrentPoemIndex] = useState(0);
   const [selectedEmotion, setSelectedEmotion] = useState("All");
   const [isSmallerThan800] = useMediaQuery("(max-width: 800px)");
+  const [showImproved, setShowImproved] = useState(false);
 
   const emotionOptions = [
     "All",
@@ -108,8 +111,8 @@ const PoemsList = () => {
   }
   
   const currentPoem = filteredPoems[currentPoemIndex];
-
-  if (currentPoem == undefined) return <div>No poems.</div>;
+  if (currentPoem == undefined) return (<div>No poems.</div>)
+  const poemContent = showImproved && currentPoem.improved_poem ? formatPoem(currentPoem.improved_poem) : formatPoem(currentPoem.content)
 
   return (
         <Center minHeight="100vh"
@@ -148,7 +151,15 @@ const PoemsList = () => {
                       color="gray.200"
                       fontFamily="monaco,Consolas,Lucida Console,monospace" 
                       mb={8}
-                      >{formatPoem(currentPoem.content)}</Text>
+                      >{poemContent}</Text>
+                </Box>
+                <Checkbox
+                  isChecked={showImproved}
+                  onChange={(e) => setShowImproved(e.target.checked)}
+                  isDisabled={currentPoem.improved_poem === undefined}
+                >Improve
+                </Checkbox>
+                <Box>
                 </Box>
                 <Box display="flex" justifyContent="space-between">
                   <IconButton
